@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\myFirstController;
 use App\Models\studentsdata;
+use App\Http\Controllers\yajraDatatablesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,3 +33,5 @@ Route::get ( '/usingdatatables', function () {
     $data = studentsdata::all ();
     return view ( 'usingdatatables' )->withData ( $data );
 } );
+
+Route::get('/usingyajradatatables', [yajraDatatablesController::class, 'index']);
