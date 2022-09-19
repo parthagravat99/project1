@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\myFirstController;
+use App\Models\studentsdata;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +27,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get ( '/usingdatatables', function () {
+    $data = studentsdata::all ();
+    return view ( 'usingdatatables' )->withData ( $data );
+} );

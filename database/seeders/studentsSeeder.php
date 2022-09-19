@@ -20,7 +20,7 @@ class studentsSeeder extends Seeder
     public function run()
     {
         $faker=faker::create();
-        for($count=0;$count<10;$count++){
+        for($count=0;$count<100;$count++){
             DB::table('students')->insert([
                 'name' => $faker->name(),
                 'email' => $faker->email(),
