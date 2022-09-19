@@ -19,3 +19,10 @@ Route::get('/', function () {
 });
 
 Route::get('/hello/{name?}',[myFirstController::class,'helloUser']);
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
