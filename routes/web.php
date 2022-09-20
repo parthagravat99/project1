@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\myFirstController;
 use App\Models\studentsdata;
 use App\Http\Controllers\yajraDatatablesController;
+use App\Http\Controllers\profileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Route::view('/profile','profile');
+
+Route::redirect('/home','/profile');
+
+Route::get('/profile',[profileController::class,'show']);
 
 Route::get ( '/usingdatatables', function () {
     $data = studentsdata::all ();

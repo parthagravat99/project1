@@ -17,7 +17,12 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/home';
+    // public const HOME = '/home';
+    protected function authenticated() {
+        if (Auth::check()) {
+            return redirect()->route('profile');
+        }
+    }
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
