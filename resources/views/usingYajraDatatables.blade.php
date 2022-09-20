@@ -24,7 +24,10 @@
                     { data: 'id', name: 'id' },
                     { data: 'name', name: 'name' },
                     { data: 'email', name: 'email' },
-                    { data: 'phone', name: 'phone' }
+                    { data: 'phone', name: 'phone' },
+                    { data: 'created_at', name: 'created_at' },
+                    { data: 'action', name: 'action', orderable: false, searchable: false },
+
                  ]
        });
     });
@@ -50,6 +53,8 @@
                  <th>Name</th>
                  <th>Email</th>
                  <th>Phone</th>
+                 <th>Created at</th>
+                 <th>Action</th>
               </tr>
            </thead>
         </table>
