@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+
 class myFirstController extends Controller
 {
     //
@@ -11,4 +12,6 @@ class myFirstController extends Controller
     {
         return view('hello',['name123'=>$name]);
     }
+
+    
 }

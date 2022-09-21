@@ -2,9 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\myFirstController;
-use App\Models\studentsdata;
 use App\Http\Controllers\yajraDatatablesController;
 use App\Http\Controllers\profileController;
+use App\Http\Controllers\datatablesController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -30,15 +31,10 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// Route::view('/profile','profile');
-
 Route::redirect('/home','/profile');
 
 Route::get('/profile',[profileController::class,'show']);
 
-Route::get ( '/usingdatatables', function () {
-    $data = studentsdata::all ();
-    return view ( 'usingdatatables' )->withData ( $data );
-} );
+Route::get ( '/usingdatatables',[datatablesController::class,'showDatatables']);
 
 Route::get('/usingyajradatatables', [yajraDatatablesController::class, 'index']);
