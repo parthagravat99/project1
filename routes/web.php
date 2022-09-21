@@ -38,3 +38,5 @@ Route::get('/profile',[profileController::class,'show']);
 Route::get ( '/usingdatatables',[datatablesController::class,'showDatatables']);
 
 Route::get('/usingyajradatatables', [yajraDatatablesController::class, 'index']);
+
+Route::get('/deletetabledata', [yajraDatatablesController::class, 'destroy']);

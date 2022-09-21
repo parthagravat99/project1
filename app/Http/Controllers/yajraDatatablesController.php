@@ -21,8 +21,8 @@ class yajraDatatablesController extends Controller
             })
             ->addColumn('action', function($data){
        
-                $btn = '<button type="button" id="edit_button" onclick="javascript:void(0)">edit</button>';
-                $btn = $btn.'<button type="button" id="delete_button" onclick="javascript:void(0)">delete</button>';
+                $btn = '<button type="button" class="edit_button" value='.$data->id.'>edit</button>';
+                $btn = $btn.'<button type="button" class="delete_button" value='.$data->id.'>delete</button>';
 
                  return $btn;
             })
@@ -30,5 +30,11 @@ class yajraDatatablesController extends Controller
             ->make(true);
         }
         return view('usingYajraDatatables');
+    }
+
+    public function destroy(Request $request)
+    {
+        $com = studentsdata::where('id',$request->id)->delete();
+        return Response()->json($com);
     }
 }

@@ -30,6 +30,17 @@
 
                  ]
        });
+
+       $("body").on('click','.delete_button',function(){
+         $.ajax({
+            url: "{{ url('deletetabledata') }}",
+            data:{id:$(this).val()},
+            success: function(res){
+                        var oTable = $('#yajra-datatables-example').dataTable();
+                        oTable.fnDraw(false);
+                     }
+         })
+       });
     });
 </script>
 
