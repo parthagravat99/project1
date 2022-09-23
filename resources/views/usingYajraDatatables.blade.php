@@ -32,14 +32,21 @@
        });
 
        $("body").on('click','.delete_button',function(){
-         $.ajax({
+         $.when(
+            $.ajax({
+               url: "{{ url('deletedataemail') }}",
+               data:{id:$(this).val()},
+            }),
+            
+            $.ajax({
             url: "{{ url('deletetabledata') }}",
             data:{id:$(this).val()},
-            success: function(res){
-                        var oTable = $('#yajra-datatables-example').dataTable();
-                        oTable.fnDraw(false);
-                     }
-         })
+         }),
+
+         ).done(function(){
+               var oTable = $('#yajra-datatables-example').dataTable();
+               oTable.fnDraw(false);   
+         });
        });
     });
 </script>

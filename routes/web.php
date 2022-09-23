@@ -5,6 +5,7 @@ use App\Http\Controllers\myFirstController;
 use App\Http\Controllers\yajraDatatablesController;
 use App\Http\Controllers\profileController;
 use App\Http\Controllers\datatablesController;
+use App\Http\Controllers\SendEmailController;
 
 
 /*
@@ -40,3 +41,7 @@ Route::get ( '/usingdatatables',[datatablesController::class,'showDatatables']);
 Route::get('/usingyajradatatables', [yajraDatatablesController::class, 'index']);
 
 Route::get('/deletetabledata', [yajraDatatablesController::class, 'destroy']);
+
+Route::get('send-email', [SendEmailController::class, 'index']);
+
+Route::get('/deletedataemail', [SendEmailController::class, 'deleteDataEmail']);
