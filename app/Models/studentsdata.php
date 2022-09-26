@@ -9,4 +9,7 @@ class studentsdata extends Model
 {
     use HasFactory;
     protected $table="students";
+
+
+    
 }

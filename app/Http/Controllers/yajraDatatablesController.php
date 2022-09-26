@@ -42,12 +42,12 @@ class yajraDatatablesController extends Controller
     {   
         $validatedData = $request->validate([
             'name' => 'required',
-            'email' => 'required|unique:students|max:255',
-            'phone' => 'required|unique:students|max:255',
+            'email' => 'required|max:255',
+            'phone' => 'required|max:255',
           ]);
-          if($validate->fails()){
-            return back()->withErrors($validate->errors())->withInput();
-          }
+        //   if($validatedData->fails()){
+        //     return back()->withErrors($validatedData->errors())->withInput();
+        //   }
   
 
         studentsdata::insert([
@@ -55,7 +55,7 @@ class yajraDatatablesController extends Controller
             'email'=>$request->email,
             'phone'=>$request->phone,
         ]);
-        return view('usingYajraDatatables');
+        // return view('usingYajraDatatables');
     }
 
     public function update($id)
@@ -69,12 +69,12 @@ class yajraDatatablesController extends Controller
     {   
         $validatedData = $request->validate([
             'name' => 'required',
-            'email' => 'required|unique:students|max:255',
-            'phone' => 'required|unique:students|max:255',
+            'email' => 'required|max:255',
+            'phone' => 'required|max:255',
           ]);
-          if($validate->fails()){
-            return back()->withErrors($validate->errors())->withInput();
-          }
+        //   if($validatedData->fails()){
+        //     return back()->withErrors($validatedData->errors())->withInput();
+        //   }
 
         studentsdata::where('id',$id)->update([
             'name'=>$request->name,
