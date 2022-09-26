@@ -48,6 +48,15 @@
                oTable.fnDraw(false);   
          });
        });
+
+       $("#add_button").click(function(){
+         window.open("{{url('form')}}");
+       });
+
+       $("body").on('click','.edit_button',function(){
+         var id=$(this).val();
+         window.open('update/'+id);
+       });
     });
 </script>
 
@@ -60,8 +69,9 @@
 
     <div class="card-header text-center font-weight-bold">
       <h2>Laravel 9 DataTables Example Tutorial</h2>
+      <button type="button" id="add_button">add</button>
     </div>
-
+    
     <div class="card-body">
 
         <table class="table table-bordered" id="yajra-datatables-example">

@@ -37,4 +37,51 @@ class yajraDatatablesController extends Controller
         $com = studentsdata::where('id',$request->id)->delete();
         return Response()->json($com);
     }
+
+    public function input(Request $request)
+    {   
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:students|max:255',
+            'phone' => 'required|unique:students|max:255',
+          ]);
+          if($validate->fails()){
+            return back()->withErrors($validate->errors())->withInput();
+          }
+  
+
+        studentsdata::insert([
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'phone'=>$request->phone,
+        ]);
+        return view('usingYajraDatatables');
+    }
+
+    public function update($id)
+    {
+        $updateData=studentsdata::where('id',$id)->first();
+        return view('form',['updateData'=>$updateData]);
+    
+    }
+
+    public function updateData(Request $request,$id)
+    {   
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:students|max:255',
+            'phone' => 'required|unique:students|max:255',
+          ]);
+          if($validate->fails()){
+            return back()->withErrors($validate->errors())->withInput();
+          }
+
+        studentsdata::where('id',$id)->update([
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'phone'=>$request->phone,
+        ]);
+        // return view('usingYajraDatatables');
+        
+    }
 }

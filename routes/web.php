@@ -45,3 +45,11 @@ Route::get('/deletetabledata', [yajraDatatablesController::class, 'destroy']);
 Route::get('send-email', [SendEmailController::class, 'index']);
 
 Route::get('/deletedataemail', [SendEmailController::class, 'deleteDataEmail']);
+
+Route::view('/form','form');
+
+Route::post('/inputdata', [yajraDatatablesController::class, 'input']);
+
+Route::get('/update/{id}', [yajraDatatablesController::class, 'update']);
+
+Route::put('/updatedata/{id}', [yajraDatatablesController::class, 'updateData'])->name('updatedata');
