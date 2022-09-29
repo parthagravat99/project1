@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
-use App\Models\studentsdata;
+use App\Models\Studentsdata;
 use Carbon\Carbon;
+use App\Observers\studentsObserver;
 
 
 class yajraDatatablesController extends Controller
@@ -13,7 +14,7 @@ class yajraDatatablesController extends Controller
     public function index(){
         
         if(request()->ajax()) {
-            $data=studentsdata::select('*');
+            $data=Studentsdata::select('*');
             return datatables()->of($data)
             ->addIndexColumn()
             ->addColumn('created_at', function() {
@@ -34,7 +35,7 @@ class yajraDatatablesController extends Controller
 
     public function destroy(Request $request)
     {
-        $com = studentsdata::where('id',$request->id)->delete();
+        $com = Studentsdata::where('id',$request->id)->delete();
         return Response()->json($com);
     }
 
@@ -49,18 +50,19 @@ class yajraDatatablesController extends Controller
         //     return back()->withErrors($validatedData->errors())->withInput();
         //   }
   
+        $student = new Studentsdata();
+        $student->name = $request->name;
+        $student->email = $request->email;
+        $student->phone = $request->phone;
+        $student->save();
 
-        studentsdata::insert([
-            'name'=>$request->name,
-            'email'=>$request->email,
-            'phone'=>$request->phone,
-        ]);
-        // return view('usingYajraDatatables');
+        // 
+        return view('usingYajraDatatables');
     }
 
     public function update($id)
     {
-        $updateData=studentsdata::where('id',$id)->first();
+        $updateData=Studentsdata::where('id',$id)->first();
         return view('form',['updateData'=>$updateData]);
     
     }
@@ -76,12 +78,12 @@ class yajraDatatablesController extends Controller
         //     return back()->withErrors($validatedData->errors())->withInput();
         //   }
 
-        studentsdata::where('id',$id)->update([
+        Studentsdata::where('id',$id)->update([
             'name'=>$request->name,
             'email'=>$request->email,
             'phone'=>$request->phone,
         ]);
-        // return view('usingYajraDatatables');
+        return view('usingYajraDatatables');
         
     }
 }
