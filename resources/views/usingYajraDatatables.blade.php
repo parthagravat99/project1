@@ -26,6 +26,7 @@
                     { data: 'email', name: 'email' },
                     { data: 'phone', name: 'phone' },
                     { data: 'created_at', name: 'created_at' },
+                    { data: 'subscrioption', name: 'subscrioption' },
                     { data: 'action', name: 'action', orderable: false, searchable: false },
 
                  ]
@@ -50,12 +51,12 @@
        });
 
        $("#add_button").click(function(){
-         window.open("{{url('form')}}");
+         window.open("{{url('form')}}",'_self');
        });
 
        $("body").on('click','.edit_button',function(){
          var id=$(this).val();
-         window.open('update/'+id);
+         window.open("{{url('update')}}/"+id,'_self');
        });
     });
 </script>
@@ -82,6 +83,7 @@
                  <th>Email</th>
                  <th>Phone</th>
                  <th>Created at</th>
+                 <th>Subscrioption End</th>
                  <th>Action</th>
               </tr>
            </thead>

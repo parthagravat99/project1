@@ -17,8 +17,12 @@ class yajraDatatablesController extends Controller
             $data=Studentsdata::select('*');
             return datatables()->of($data)
             ->addIndexColumn()
-            ->addColumn('created_at', function() {
-                return Carbon::now();
+            ->addColumn('created_at', function($data) {
+                return $data->created_at;
+            })
+            ->addColumn('subscrioption',function($data){
+                $subscribe= new studentsdata;
+                return $subscribe->subscriptiondays($data->created_at);
             })
             ->addColumn('action', function($data){
        
@@ -35,7 +39,8 @@ class yajraDatatablesController extends Controller
 
     public function destroy(Request $request)
     {
-        $com = Studentsdata::where('id',$request->id)->delete();
+        $com = Studentsdata::where('id',$request->id);
+        $com->delete();
         return Response()->json($com);
     }
 
@@ -57,7 +62,8 @@ class yajraDatatablesController extends Controller
         $student->save();
 
         // 
-        return view('usingYajraDatatables');
+        return redirect(url('usingyajradatatables'));
+        // return subscriptiondays(Carbon::now());
     }
 
     public function update($id)
@@ -78,12 +84,17 @@ class yajraDatatablesController extends Controller
         //     return back()->withErrors($validatedData->errors())->withInput();
         //   }
 
-        Studentsdata::where('id',$id)->update([
-            'name'=>$request->name,
-            'email'=>$request->email,
-            'phone'=>$request->phone,
-        ]);
-        return view('usingYajraDatatables');
+        // Studentsdata::where('id',$id)->update([
+        //     'name'=>$request->name,
+        //     'email'=>$request->email,
+        //     'phone'=>$request->phone,
+        // ]);
+        $student=Studentsdata::find($id);
+        $student->name = $request->name;
+        $student->email = $request->email;
+        $student->phone = $request->phone;
+        $student->save();
+        return redirect(url('usingyajradatatables'));
         
     }
 }

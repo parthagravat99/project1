@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Observers\StudentsObserver;
 use Illuminate\Database\Eloquent\Concerns\HasEvents;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Carbon\Carbon;
 
 
 class Studentsdata extends Model
@@ -36,5 +37,13 @@ class Studentsdata extends Model
     public function setEmailAttribute($value)
     {
         $this->attributes['email']=strtolower($value);
+    }
+
+    public function subscriptiondays($date)
+    {
+        $startDate=Carbon::parse($date);
+        $endDate=$startDate->addDays(30);
+        $daysLeft=$endDate->diffForHumans(['parts' => 2]);
+        return $daysLeft;
     }
 }
