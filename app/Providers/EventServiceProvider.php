@@ -6,6 +6,12 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
+use App\Models\Studentsdata;
+use App\Observers\StudentsObserver;
+use App\Models\User;
+use App\Observers\UserObserver;
+use Log;
+
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -27,7 +33,11 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Log::info("Provide event register");
+        Studentsdata::observe(StudentsObserver::class);
+        User::observe(UserObserver::class);
+        Log::info("Provide event register Done");
+
     }
 
     /**
