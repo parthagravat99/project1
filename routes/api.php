@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,7 @@ $api->version('v1', function ($api) {
     $api->get('vishal', function(){
         echo "vishal";
     });
+    $api->post('showdata',[ApiController::class,'showdata']);
 });
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
