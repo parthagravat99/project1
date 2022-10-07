@@ -10,10 +10,10 @@
         @error('email')
             <span class="text-danger">{{$message}}</span>
         @enderror<br>
-        phone:<input type="text" name="phone" value="{{$updateData->phone}}"><br>
-        @error('phone')
+        <!-- password:<input type="text" name="password" value="{{ $updateData->email }}"><br>
+        @error('password')
             <span class="text-danger">{{$message}}</span>
-        @enderror<br>
+        @enderror<br> -->
         <input type="submit" value="update">
     </form>
     @else
@@ -27,8 +27,8 @@
         @error('email')
             <span class="text-danger">{{$message}}</span>
         @enderror<br>
-        phone:<input type="text" name="phone" value="{{ old('phone') }}"><br>
-        @error('phone')
+        password:<input type="text" name="password" value="{{ old('password') }}"><br>
+        @error('password')
             <span class="text-danger">{{$message}}</span>
         @enderror<br>
         <input type="submit" value="submit">

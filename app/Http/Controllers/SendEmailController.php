@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\NotifyMail;
 use App\Mail\deleteDataMail;
 use Symfony\Component\HttpFoundation\Response;
-use App\Models\studentsdata;
+use App\Models\User;
 
 class SendEmailController extends Controller
 {
@@ -29,7 +29,8 @@ class SendEmailController extends Controller
 
     public function deleteDataEmail(request $request)
     {
-     $deleteData=studentsdata::where('id',$request->id)->first();
+     $deleteData=User::where('id',$request->id)->first();
      Mail::to($deleteData->email)->send(new deleteDataMail());
+  
     }
 }

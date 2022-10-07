@@ -32,7 +32,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::redirect('/home','/profile');
+// Route::redirect('/home','/profile');
 
 Route::get('/profile',[profileController::class,'show']);
 

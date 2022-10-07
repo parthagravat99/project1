@@ -24,7 +24,6 @@
                     { data: 'id', name: 'id' },
                     { data: 'name', name: 'name' },
                     { data: 'email', name: 'email' },
-                    { data: 'phone', name: 'phone' },
                     { data: 'created_at', name: 'created_at' },
                     { data: 'subscrioption', name: 'subscrioption' },
                     { data: 'action', name: 'action', orderable: false, searchable: false },
@@ -81,7 +80,6 @@
                  <th>Id</th>
                  <th>Name</th>
                  <th>Email</th>
-                 <th>Phone</th>
                  <th>Created at</th>
                  <th>Subscrioption End</th>
                  <th>Action</th>

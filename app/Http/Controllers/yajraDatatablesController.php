@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
-use App\Models\Studentsdata;
+use App\Models\User;
 use Carbon\Carbon;
 use App\Observers\studentsObserver;
 
@@ -14,14 +14,14 @@ class yajraDatatablesController extends Controller
     public function index(){
         
         if(request()->ajax()) {
-            $data=Studentsdata::select('*');
+            $data=User::select('*');
             return datatables()->of($data)
             ->addIndexColumn()
             ->addColumn('created_at', function($data) {
                 return $data->created_at;
             })
             ->addColumn('subscrioption',function($data){
-                $subscribe= new studentsdata;
+                $subscribe= new User;
                 return $subscribe->subscriptiondays($data->created_at);
             })
             ->addColumn('action', function($data){
@@ -39,7 +39,7 @@ class yajraDatatablesController extends Controller
 
     public function destroy(Request $request)
     {
-        $com = Studentsdata::where('id',$request->id);
+        $com = User::where('id',$request->id);
         $com->delete();
         return Response()->json($com);
     }
@@ -49,16 +49,17 @@ class yajraDatatablesController extends Controller
         $validatedData = $request->validate([
             'name' => 'required',
             'email' => 'required|max:255',
-            'phone' => 'required|max:255',
+            'password' => 'required|max:255'
           ]);
         //   if($validatedData->fails()){
         //     return back()->withErrors($validatedData->errors())->withInput();
         //   }
   
-        $student = new Studentsdata();
+        $student = new User();
         $student->name = $request->name;
         $student->email = $request->email;
-        $student->phone = $request->phone;
+        $student->password = $request->password;
+
         $student->save();
 
         // 
@@ -68,7 +69,7 @@ class yajraDatatablesController extends Controller
 
     public function update($id)
     {
-        $updateData=Studentsdata::where('id',$id)->first();
+        $updateData=User::where('id',$id)->first();
         return view('form',['updateData'=>$updateData]);
     
     }
@@ -78,21 +79,23 @@ class yajraDatatablesController extends Controller
         $validatedData = $request->validate([
             'name' => 'required',
             'email' => 'required|max:255',
-            'phone' => 'required|max:255',
-          ]);
+            // 'password' => 'required|max:255'
+
+        ]);
         //   if($validatedData->fails()){
         //     return back()->withErrors($validatedData->errors())->withInput();
         //   }
 
-        // Studentsdata::where('id',$id)->update([
+        // User::where('id',$id)->update([
         //     'name'=>$request->name,
         //     'email'=>$request->email,
         //     'phone'=>$request->phone,
         // ]);
-        $student=Studentsdata::find($id);
+        $student=User::find($id);
         $student->name = $request->name;
         $student->email = $request->email;
-        $student->phone = $request->phone;
+        // $student->password = $request->password;
+
         $student->save();
         return redirect(url('usingyajradatatables'));
         
