@@ -29,12 +29,16 @@ $api->version('v1', function ($api) {
             echo "vishal";
         });
         
-        $api->post('showdata',[Api\V1\ApiController::class,'showdata']);
-    
+
+        $api->group(['middleware'=>'auth:api'],function($api){
+
+            $api->post('showdata',[Api\V1\ApiController::class,'showdata']);
+            
+            $api->post('logout', [AuthController::class,'logout']);
+            $api->post('refresh', [AuthController::class,'refresh']);
+            $api->post('me', [AuthController::class,'me']);
+        });
         $api->post('login', [AuthController::class,'login']);
-        $api->post('logout', [AuthController::class,'logout']);
-        $api->post('refresh', [AuthController::class,'refresh']);
-        $api->post('me', [AuthController::class,'me']);
     
     });
 
