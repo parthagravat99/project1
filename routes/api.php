@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ApiController;
+use App\Http\Controllers\Api;
 use App\Http\Controllers\AuthController;
 
 
@@ -19,18 +19,17 @@ use App\Http\Controllers\AuthController;
 
 $api = app('Dingo\Api\Routing\Router');
 $api->version('v1', function ($api) {
-    $api->get('vishal', function(){
-        echo "vishal";
-    });
-    
-    $api->post('showdata',[ApiController::class,'showdata']);
 
     $api->group([
 
-        'middleware' => 'api',
-        // 'namespace' => 'App\Http\Controllers',
+        'prefix' => 'v1'
     
     ], function ($api) {
+        $api->get('vishal', function(){
+            echo "vishal";
+        });
+        
+        $api->post('showdata',[Api\V1\ApiController::class,'showdata']);
     
         $api->post('login', [AuthController::class,'login']);
         $api->post('logout', [AuthController::class,'logout']);
@@ -38,6 +37,27 @@ $api->version('v1', function ($api) {
         $api->post('me', [AuthController::class,'me']);
     
     });
+
+
+    
+});
+
+$api->version('v2', function ($api) {
+    $api->group([
+        'prefix'=>'v2'
+    ],function($api){
+
+        $api->get('vishal', function(){
+            echo "parth";
+        });
+
+        $api->post('showdata',[Api\V2\ApiController::class,'showdata']);
+    
+    });
+
+
+
+
 });
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
