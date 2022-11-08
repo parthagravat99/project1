@@ -14,10 +14,10 @@ class AuthController extends Controller
      *
      * @return void
      */
-    // public function __construct()
-    // {
-    //     $this->middleware('auth:api', ['except' => ['login']]);
-    // }
+    public function __construct()
+    {
+    
+    }
 
     /**
      * Get a JWT token via given credentials.

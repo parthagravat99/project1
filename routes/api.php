@@ -29,6 +29,7 @@ $api->version('v1', function ($api) {
             echo "vishal";
         });
         
+        $api->post('login', [AuthController::class,'login']);
 
         $api->group(['middleware'=>'auth:api'],function($api){
 
@@ -38,7 +39,6 @@ $api->version('v1', function ($api) {
             $api->post('refresh', [AuthController::class,'refresh']);
             $api->post('me', [AuthController::class,'me']);
         });
-        $api->post('login', [AuthController::class,'login']);
     
     });
 
